@@ -1,0 +1,14 @@
+gr1:
+  name: Buderus Temperatur
+  entities:
+    - sensor.buderus_supply_temperature
+    - sensor.buderus_outside_temperature
+  hours_to_show: 24
+  refresh: 0
+gr2:
+  name: Temperature
+  entities:
+    - sensor.buderus_boiler_flame
+    - sensor.buderus_modulation
+  hours_to_show: 24
+  # refresh: 0

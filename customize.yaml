@@ -1,0 +1,146 @@
+﻿sun.sun:
+  friendly_name: Sonnenstand
+sensor.weather_symbol:
+  friendly_name: Wetter
+  
+light.wohnzimmer:
+  hidden: true
+light.group_for_wakeup:
+  hidden: true
+light.esszimmer:
+  hidden: true
+
+sensor.kgstromzaehler_gas_energy_counter:
+  hidden: true
+sensor.kgstromzaehler_gas_power:
+  hidden: true
+
+sensor.buderus_moduliert:
+  hidden: true
+sensor.buderus_vollgas:
+  hidden: true
+  
+
+  #Homematic auflösen
+  # Add an entry for each entity that you want to overwrite.
+switch.keq0942817:
+  #hidden: true
+  friendly_name: OG.SWT.Arbeitszimmer
+switch.keq0944256:
+  friendly_name: OG.SWT.Kinderzimmer
+switch.outdoorswaussenlicht2:
+# KEQ1075606
+  friendly_name: OUT.SWT.Aussenlicht2
+switch.outdoorswaussenlicht1:
+# KEQ1076102
+  friendly_name: OUT.SWT.Aussenlicht1
+switch.outdoorswaussenlicht3:
+# MEQ0357447
+  friendly_name: OUT.SWT.Aussenlicht3
+
+
+
+
+cover.keq0540906:  
+# KEQ0540906  
+  friendly_name: EG.BL.Wintergarten
+
+
+climate.oghzbad:
+  friendly_name: OG.HZ.Badezimmer
+
+climate.kghzsauna:
+# NEQ1410379
+  friendly_name: KG.HZ.Sauna
+
+climate.oghzarbeitszimmer:
+# MEQ1879097
+  friendly_name: OG.HZ.Arbeitszimmer
+
+climate.oghzkinderzimmer:
+# MEQ0446066  
+  friendly_name: OG.HZ.Kinderzimmer
+  
+climate.kghzgaestezimmer:  
+# LEQ0849953
+  friendly_name: KG.HZ.Gaestezimmer
+  
+climate.oghzschlafzimmer1:
+# MEQ1879093 
+  friendly_name: OG.HZ.Schlafzimmer1
+
+climate.oghzschlafzimmer2:
+# MEQ1880204 
+  friendly_name: OG.HZ.Schlafzimmer2
+
+climate.eghzesszimmer:
+# KEQ0722599
+  friendly_name: EG.HZ.Esszimmer
+
+climate.eghzwohnzimmer1:
+# LEQ0257213
+  friendly_name: EG.HZ.Wohnzimmer1
+  
+climate.eghzwohnzimmer2:
+# LEQ1521231 
+  friendly_name: EG.HZ.Wohnzimmer2
+
+climate.eghzwintergarten1:
+# LEQ0848792
+  friendly_name: EG.HZ.Wintergarten1
+
+climate.eghzwintergarten2:
+# MEQ1879069
+  friendly_name: EG.HZ.Wintergarten2
+  
+switch.meq0327223:
+  friendly_name: KG.SWT.Badezimmer
+
+
+sensor.kgstromzaehler_energy_counter:
+# MEQ0381492
+  friendly_name: KG.CT.Strom_Wh
+sensor.kgstromzaehler_power:
+  friendly_name: KG.CT.Strom_W
+
+sensor.hmsecwds2_meq0585132_state:  
+# MEQ0585132 
+  friendly_name: KG.SENS.Wassermelder
+
+binary_sensor.kgfssauna_state:
+#LEQ1034023
+  friendly_name: KG.FS.Sauna
+
+binary_sensor.meq1659102_state:
+  friendly_name: OG.FS.Badezimmer
+  
+binary_sensor.keq0236832_motion:
+  friendly_name: Outdoor.BWM.Mobil
+
+sensor.keq0236832_brightness:
+  friendly_name: Outdoor.LUM.Mobil
+
+binary_sensor.outdoorbwmwest_motion:
+# JEQ0701972
+  friendly_name: Outdoor.BWM.West
+
+sensor.outdoorbwmwest_brightness:
+  friendly_name: Outdoor.LUM.West  
+  
+binary_sensor.outdoorbwmnord_motion:
+# KEQ1070386  
+  friendly_name: Outdoor.BWM.Nord
+
+sensor.outdoorbwmnord_brightness:
+  friendly_name: Outdoor.LUM.Nord
+  
+binary_sensor.leq0612014_motion:
+  friendly_name: Outdoor.BWM.Ost
+  
+sensor.leq0612014_brightness:
+  friendly_name: Outdoor.LUM.Ost
+
+binary_sensor.keq0236832_motion:
+  friendly_name: Outdoor.BWM.Mobil
+
+  

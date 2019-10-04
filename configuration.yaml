@@ -1,0 +1,312 @@
+homeassistant:
+  # Name of the location where Home Assistant is running
+  name: Home
+  # Location required to calculate the time the sun rises and sets
+  latitude: !secret basic_latitude 
+  longitude: !secret basic_longitude
+  # Impacts weather/sunrise data (altitude above sea level in meters)
+  elevation: 350
+  # metric for Metric, imperial for Imperial
+  unit_system: metric
+  # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+  time_zone: Europe/Berlin
+  whitelist_external_dirs:
+    - /tmp
+    - /config
+  # Customization file
+  customize: !include customize.yaml
+
+  auth_providers:
+   - type: legacy_api_password
+     api_password: !secret basic_api
+   - type: homeassistant  
+   - type: trusted_networks
+     trusted_networks:
+       - 192.168.178.0/24
+     allow_bypass_login: true
+
+ 
+
+lovelace:
+  mode: yaml
+
+  
+http:
+  ssl_certificate: !secret ssl_certificate_path
+  ssl_key: !secret ssl_key_path
+  base_url: !secret external_url     
+     
+hue:
+  bridges:
+    - host: 192.168.178.27
+      allow_unreachable: true
+      allow_hue_groups: true  
+
+   
+binary_sensor:
+  - platform: huesensor 
+
+netatmo:
+  api_key: !secret netatmo_api
+  secret_key: !secret netatmo_key
+  username: !secret email
+  password: !secret netatmo_pass
+
+ffmpeg:
+  ffmpeg_bin: /usr/bin/ffmpeg
+
+ios:
+
+logger:
+  default: info
+  logs:
+    homeassistant.core: error
+    homeassistant.components.buderus: error
+    homeassistant.components.sensor: error
+    homeassistant.components.device_tracker: error
+    homeassistant.components.zwave: error
+    pyicloud.services.findmyiphone.http: error
+    custom_components.buderus: error
+    homeassistant.components.mqtt: error
+    homeassistant.components.homematic: error
+    pyhomematic: error
+    custom_components.sensor.buderus: error
+    homeassistant.components.light: info
+    homeassistant.components.light.hue: info
+    homeassistant.components.http: debug
+    homeassistant.components.websocket_api: error
+   
+# Example configuration.yaml entry with exclude
+recorder:
+  purge_keep_days: 10
+  db_url: !secret db_url
+  exclude:
+    domains:
+      - automation
+      - weblink
+      - updater
+    entities:
+      - sun.sun # Don't record sun data
+      - sensor.last_boot # Comes from 'systemmonitor' sensor platform
+      - sensor.date
+
+
+   
+
+    
+# Show links to resources in log and frontend
+#introduction:
+
+# Enables the frontend
+frontend:
+
+# Enables configuration UI
+config:
+
+mqtt:
+  broker: 127.0.0.1
+  username: !secret userbase
+  password: !secret basic_standard2
+  #discovery: true
+  # discovery_prefix: homeassistant
+# Uncomment this if you are using SSL/TLS, running in Docker container, etc.
+# http:
+#   base_url: example.duckdns.org:8123
+
+# Checks for available updates
+# Note: This component will send some information about your system to
+# the developers to assist with development of Home Assistant.
+# For more information, please see:
+# https://home-assistant.io/blog/2016/10/25/explaining-the-updater/
+
+
+# configuration.yaml entry
+updater:
+  # Optional, allows Home Assistant developers to focus on popular components.
+  # include_used_components: true
+
+# Discover some devices automatically
+discovery:
+
+cast:
+  media_player:
+
+
+# Allows you to issue voice commands from the frontend in enabled browsers
+#conversation:
+
+# Enables support for tracking state changes over time
+history:
+
+# View all events in a logbook
+logbook:
+
+zwave:
+  usb_path: /dev/ttyACM0
+  
+# Enables a map showing the location of tracked devices
+map:
+
+zone:
+  - name: !secret zone1 
+    latitude: !secret lat_zone1
+    longitude: !secret long_zone1
+    radius: 500
+    icon: mdi:briefcase
+
+  - name: !secret zone2
+    latitude: !secret lat_zone2
+    longitude: !secret long_zone2
+    radius: 500
+    icon: mdi:worker
+    
+device_tracker:
+#  - platform: icloud
+#    username: !secret email
+#    password: !secret basic_icloud 
+#    account_name: flo
+
+# Track the sun
+sun:
+
+# Text to speech
+#tts:
+#  - platform: google
+
+# Cloud
+# cloud:
+
+homematic:
+  interfaces:
+    rf:
+      host: 192.168.178.7
+      resolvenames: json
+      username: Admin
+      password: !secret basic_standard2
+  hosts:
+    ccu2:
+      host: 192.168.178.7
+      username: Admin
+      password: !secret basic_standard2
+ 
+ #     password: !secret pw_homematic
+
+# Example configuration.yaml entry for the Telegram Bot
+telegram_bot:
+  - platform: polling
+    api_key: !secret tele_api
+    allowed_chat_ids:
+      - !secret chat_id
+
+# Example configuration.yaml entry for the notifier
+notify:
+  - name: telegram_notify
+    platform: telegram
+    chat_id: !secret chat_id
+  - name: iphones
+    platform: group
+    services:
+      - service: ios_formobile
+      - service: ios_judith
+    
+#media_player:
+#  - platform: samsungtv
+#    host: 192.168.178.30
+#    name: Samsung Q7F
+#    port: 8001
+#    mac: 7C:64:56:71:79:40
+
+panel_iframe:
+  configurator:
+    title: Configurator
+    icon: mdi:wrench
+    url: http://hassio.local:3218
+
+
+weather:
+  - platform: openweathermap
+    api_key: !secret basic_openweather
+    
+input_boolean:
+  eg_state_flur1:
+    initial: off
+  og_state_flur:
+    initial: off
+  climate_away_temperature:
+    initial: off
+    name: Thermostate Abwesenheitsmodus
+
+buderus:
+  host: 192.168.178.20
+  password: !secret basic_buderus
+  name: Buderus
+
+        
+switch:
+  - platform: mqtt
+    name: "Standheizung"
+    state_topic: "stat/sonoff/POWER"
+    command_topic: "cmnd/sonoff/POWER"
+    # availability_topic: "tele/sonoff/LWT"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    # payload_available: "Online"
+    # payload_not_available: "Offline"
+    retain: false
+
+timer:
+  eg_timer_flur1:
+    duration: '00:00:00'
+  og_timer_treppe:
+    duration: '00:00:00'
+  out_timer_standheizung:
+    duration: '00:00:00'
+  kg_timer_saunafenster:
+    duration: '00:00:00'
+  og_timer_badefenster:
+    duration: '00:00:00'
+  og_timer_kizi:
+    duration: '00:00:00'
+
+shell_command:
+  ipcam1_mp4: bash -x /config/shell_scripts/ipcam1_mp4.sh >> /config/temp/ipcam1.log 2>&1
+  ipcam1_jpeg: bash -x /config/shell_scripts/ipcam1_jpeg.sh >> /config/temp/ipcam1.log 2>&1
+  
+  
+  
+calendar:
+  - platform: caldav
+    username: !secret userbase
+    password: !secret caldav
+    url: !secret caldav_url
+    custom_calendars:
+      - name: 'Blaue Tonne'
+        calendar: 'HASS'
+        search: 'BlaueTonne'
+      - name: 'Schwarze Tonne'
+        calendar: 'HASS'
+        search: 'SchwarzeTonne'
+      - name: 'Gelber Sack'
+        calendar: 'HASS'
+        search: 'GelberSack'
+
+counter:
+  buderus_starts:
+    name: Brennerstarts_Heizung
+    step: 1
+    icon: mdi:radiator
+  buderus_starts_today:
+    name: Brennerstarts_Heizung_Heute
+    step: 1
+    icon: mdi:radiator
+
+
+
+## INCLUDES     
+group: !include groups.yaml
+automation: !include automations.yaml
+script: !include scripts.yaml
+sensor: !include sensors.yaml
+camera: !include camera.yaml
+history_graph: !include graph.yaml

@@ -1,0 +1,259 @@
+# Weather prediction
+#   - https://raw.githubusercontent.com/robmarkcole/Hue-sensors-HASS/master/custom_updater.json
+- platform: huesensor
+#  ip_address: 192.168.178.27
+#  token: !secret basic_hue
+- platform: command_line
+  name: SSL cert expiry
+  unit_of_measurement: days
+  scan_interval: 10800
+  command: "ssl-cert-check -b -c !secret ssl_cert_path | awk '{ print $NF }'"
+- platform: dwd_weather_warnings
+  region_name: !secret dwd_region  
+- platform: yr
+  name: Weather
+  forecast: 24
+  monitored_conditions:
+    - temperature
+    - symbol
+    - precipitation
+    - windSpeed
+    - pressure
+    - windDirection
+    - humidity
+    - fog
+    - cloudiness
+    - lowClouds
+    - mediumClouds
+    - highClouds
+    - dewpointTemperature
+- platform: buderus
+  resources:
+    - outside_temperature
+    - supply_temperature
+    - return_temperature
+    - room_temperature
+    - hotwater_temperature
+    - heating_current_roomsetpoint
+    # - heating_manual_roomsetpoint
+    - heating_temp_roomsetpoint
+    - hotwater_current_temperature
+    - hotwater_current_setpoint
+    - hotwater_current_workingtime
+    - hotwater_current_waterflow
+    - heatsource_modulation
+    - heating_templevel_eco
+    - heating_templevel_comfort
+    - heating_activeprogram
+    - heating_operation_mode
+    - boiler_flame
+    - pump_modulation    
+- platform: template
+  sensors:
+    eg_temp_flur1:
+      friendly_name: 'EG.TEMP.Flur1'
+      value_template: '{{states.binary_sensor.motion_eg_bwm_flur1.attributes.temperature}}'
+      unit_of_measurement: °C
+    eg_lux_flur1:
+      friendly_name: 'EG.LUX.Flur1'
+      value_template: '{{states.binary_sensor.motion_eg_bwm_flur1.attributes.lx}}'
+      unit_of_measurement: lux
+ 
+- platform: openweathermap
+  name: current_weather
+  api_key: !secret basic_openweather
+  language: de
+  forecast: false
+  monitored_conditions:
+    - weather
+    - temperature
+    - wind_speed
+    - humidity
+    - rain
+    - clouds
+    
+- platform: template
+  sensors:
+    solar_elevation:
+      friendly_name: "Sun elevation"
+      unit_of_measurement: 'degrees'
+      value_template: "{{ states.sun.sun.attributes.elevation }}"
+    solar_azimuth:
+      friendly_name: "Sun azimuth"
+      unit_of_measurement: 'degrees'
+      value_template: "{{ states.sun.sun.attributes.azimuth }}"
+  # - platform: statistics  ## For smoothing out spikes
+    # name: wind_kph_avg
+    # entity_id: sensor.pws_wind_kph
+    # sampling_size: 3 #Measures every 15 minutes
+    # max_age:
+      # minutes: 65
+  # - platform: statistics
+    # name: irradiance_avg   ## For smoothing out spikes
+    # entity_id: sensor.br_irradiance
+    # sampling_size: 3  #Measures every 10 minutes
+    # max_age:
+      # minutes: 40
+
+
+- platform: mqtt
+  name: "Standheizung.Energy"
+  state_topic: "tele/sonoff/SENSOR"
+  value_template: '{{ value_json["ENERGY"]["Today"] }}'
+  unit_of_measurement: "kWh"
+- platform: mqtt
+  name: "Standheizung.Power"
+  state_topic: "tele/sonoff/SENSOR"
+  value_template: '{{ value_json["ENERGY"]["Power"] }}'
+  unit_of_measurement: "W"
+- platform: mqtt
+  name: "Standheizung.Voltage"
+  state_topic: "tele/sonoff/SENSOR"
+  value_template: '{{ value_json["ENERGY"]["Voltage"] }}'
+  unit_of_measurement: "V"
+- platform: mqtt
+  name: "Standheizung.Current"
+  state_topic: "tele/sonoff/SENSOR"
+  value_template: '{{ value_json["ENERGY"]["Current"] }}'
+  unit_of_measurement: "A"
+- platform: mqtt
+  name: "OG.Arbeitszimmer.Temperatur"
+  state_topic: "Tiengen/OG/Arbeitszimmer/TempHum"
+  value_template: '{{ value_json.temperature }}'
+  unit_of_measurement: "°C"
+- platform: mqtt
+  name: "OG.Arbeitszimmer.Feuchte"
+  state_topic: "Tiengen/OG/Arbeitszimmer/TempHum"
+  value_template: '{{ value_json.humidity }}'
+  unit_of_measurement: "%"  
+- platform: mqtt
+  name: "OG.Schlafzimmer.Temperatur"
+  state_topic: "Tiengen/OG/Schlafzimmer/TempHum"
+  value_template: '{{ value_json.temperature }}'
+  unit_of_measurement: "°C"
+- platform: mqtt
+  name: "OG.Schlafzimmer.Feuchte"
+  state_topic: "Tiengen/OG/Schlafzimmer/TempHum"
+  value_template: '{{ value_json.humidity }}'
+  unit_of_measurement: "%"
+  force_update: true
+- platform: mqtt
+  name: "OG.Kinderzimmer.Temperatur"
+  state_topic: "Tiengen/OG/Kinderzimmer/TempHum"
+  value_template: '{{ value_json.temperature }}'
+  unit_of_measurement: "°C"
+- platform: mqtt
+  name: "OG.Kinderzimmer.Feuchte"
+  state_topic: "Tiengen/OG/Kinderzimmer/TempHum"
+  value_template: '{{ value_json.humidity }}'
+  unit_of_measurement: "%"
+- platform: mqtt
+  name: "OG.Bad.Temperatur"
+  state_topic: "Tiengen/OG/Bad/TempHum"
+  value_template: '{{ value_json.temperature }}'
+  unit_of_measurement: "°C"
+- platform: mqtt
+  name: "OG.Bad.Feuchte"
+  state_topic: "Tiengen/OG/Bad/TempHum"
+  value_template: '{{ value_json.humidity }}'
+  unit_of_measurement: "%"
+- platform: mqtt
+  name: "EG.Wohnzimmer.Temperatur"
+  state_topic: "Tiengen/EG/Wohnzimmer/TempHum"
+  value_template: '{{ value_json.temperature }}'
+  unit_of_measurement: "°C"
+- platform: mqtt
+  name: "EG.Wohnzimmer.Feuchte"
+  state_topic: "Tiengen/EG/Wohnzimmer/TempHum"
+  value_template: '{{ value_json.humidity }}'
+  unit_of_measurement: "%"  
+- platform: mqtt
+  name: "EG.Waschkueche.Temperatur"
+  state_topic: "Tiengen/EG/Waschkueche/TempHum"
+  value_template: '{{ value_json.temperature }}'
+  unit_of_measurement: "°C"
+- platform: mqtt
+  name: "EG.Waschkueche.Feuchte"
+  state_topic: "Tiengen/EG/Waschkueche/TempHum"
+  value_template: '{{ value_json.humidity }}'
+  unit_of_measurement: "%"   
+- platform: mqtt
+  name: "KG.Gaestezimmer.Temperatur"
+  state_topic: "Tiengen/KG/Gaestezimmer/TempHum"
+  value_template: '{{ value_json.temperature }}'
+  unit_of_measurement: "°C"
+- platform: mqtt
+  name: "KG.Gaestezimmer.Feuchte"
+  state_topic: "Tiengen/KG/Gaestezimmer/TempHum"
+  value_template: '{{ value_json.humidity }}'
+  unit_of_measurement: "%"
+- platform: mqtt
+  name: "KG.Keller.Temperatur"
+  state_topic: "Tiengen/KG/Keller/TempHum"
+  value_template: '{{ value_json.temperature }}'
+  unit_of_measurement: "°C"
+- platform: mqtt
+  name: "KG.Keller.Feuchte"
+  state_topic: "Tiengen/KG/Keller/TempHum"
+  value_template: '{{ value_json.humidity }}'
+  unit_of_measurement: "%"
+  
+# History statistic
+- platform: history_stats
+  name: Brennerlaufzeit insgesamt
+  entity_id: sensor.buderus_boiler_flame
+  state: 'on'
+  type: time
+  start: '{{ now().replace(hour=0).replace(minute=0).replace(second=0) }}'
+  end: '{{ now() }}'
+- platform: history_stats
+  name: Brennerlaufzeit 60prozent
+  entity_id: sensor.buderus_moduliert
+  state: 'True'
+  type: time
+  start: '{{ now().replace(hour=0).replace(minute=0).replace(second=0) }}'
+  end: '{{ now() }}'
+- platform: history_stats
+  name: Brennerlaufzeit 100prozent
+  entity_id: sensor.buderus_vollgas
+  state: 'True'
+  type: time
+  start: '{{ now().replace(hour=0).replace(minute=0).replace(second=0) }}'
+  end: '{{ now() }}'
+
+- platform: template
+  sensors:
+    buderus_moduliert:
+      value_template: "{{((states.sensor.buderus_modulation.state) | float) == 60.0 }}"
+
+- platform: template
+  sensors:
+    buderus_vollgas:
+      value_template: "{{((states.sensor.buderus_modulation.state) | float) == 100.0 }}"
+  
+- platform: template
+  sensors:
+    buderus_verbrauch_d:
+      value_template: "{{(((states.sensor.brennerlaufzeit_100prozent.state | float)*1.9) +
+      ((states.sensor.brennerlaufzeit_60prozent.state | float)*1.1)) | round(2)}}"    
+      
+##mod:11kW = 1.1l/h
+#100%: 19kW = 1.9l/h
+
+
+# Public sensor
+- platform: netatmo
+  areas:
+    - lat_ne: !secret netatmo_lat_ne
+      lon_ne: !secret netatmo_lon_ne
+      lat_sw: !secret netatmo_lat_sw
+      lon_sw: !secret netatmo_lon_sw
+      
+      monitored_conditions:
+        - temperature
+        - pressure
+        - humidity
+        - rain
+        - windstrength
+        - guststrength
+      name: NetAtmo

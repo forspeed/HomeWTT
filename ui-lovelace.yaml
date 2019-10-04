@@ -1,0 +1,540 @@
+title: Home Assistant
+views:
+  - title: Home
+    path: default_view
+    cards:
+      - title: Schlafzimmer
+        show_header_toggle: true
+        type: entities
+        entities:
+          - light.sz_nachttisch_flo
+          - light.sz_nachttisch_judith
+          - switch.neq0214472
+          - sensor.og_schlafzimmer_feuchte
+          - sensor.og_schlafzimmer_temperatur
+      - entity: climate.oghzschlafzimmer1
+        type: thermostat
+      - entity: climate.oghzschlafzimmer2
+        type: thermostat
+      - title: Kinderzimmer
+        show_header_toggle: true
+        type: entities
+        entities:
+          - switch.keq0944256
+          - sensor.og_kinderzimmer_feuchte
+          - sensor.og_kinderzimmer_temperatur
+      - entity: climate.oghzkinderzimmer
+        type: thermostat
+      - title: Arbeitszimmer
+        show_header_toggle: true
+        type: entities
+        entities:
+          - switch.keq0942817
+          - sensor.og_arbeitszimmer_feuchte
+          - sensor.og_arbeitszimmer_temperatur
+      - entity: climate.oghzarbeitszimmer
+        type: thermostat
+      - title: Hue
+        show_header_toggle: true
+        type: entities
+        entities:
+          - sensor.motion_eg_bwm_flur1
+          - sensor.eg_lux_flur1
+          - sensor.eg_temp_flur1
+      - title: Sauna
+        show_header_toggle: true
+        type: entities
+        entities:
+          - binary_sensor.kgfssauna_state
+      - entity: climate.kghzsauna
+        type: thermostat
+      - title: Badezimmer unten
+        show_header_toggle: true
+        type: entities
+        entities:
+          - switch.meq0327223
+      - title: Badezimmer oben
+        show_header_toggle: true
+        type: entities
+        entities:
+          - switch.keq0944721
+          - sensor.og_bad_feuchte
+          - sensor.og_bad_temperatur
+      - entity: climate.oghzbad
+        type: thermostat
+      - entity: media_player.badezimmer
+        type: media-control
+      - entity: climate.kghzgaestezimmer
+        type: thermostat
+      - title: Wohn-/Esszimmer
+        show_header_toggle: true
+        type: entities
+        entities:
+          - light.wohnzimmer
+          - light.wohnzimmer_decke
+          - light.wohnzimmer_tv
+          - light.stehleuchte1
+          - light.stehleuchte2
+          - light.stehleuchte3
+          - light.esszimmer
+          - light.esszimmer_decke
+          - remote.apple_tv
+          - sensor.eg_wohnzimmer_feuchte
+          - sensor.eg_wohnzimmer_temperatur
+      - entity: climate.eghzesszimmer
+        type: thermostat
+      - entity: climate.eghzwohnzimmer1
+        type: thermostat
+      - entity: climate.eghzwohnzimmer2
+        type: thermostat
+      - entity: media_player.samsung_q7f
+        type: media-control
+      - entity: media_player.apple_tv
+        type: media-control
+      - entity: media_player.judithflo
+        type: media-control
+      - title: Wintergarten
+        show_header_toggle: true
+        type: entities
+        entities:
+          - cover.keq0540906
+          - light.wintergarten1
+          - light.wintergarten2
+          - light.wintergarten3
+      - entity: climate.eghzwintergarten1
+        type: thermostat
+      - entity: climate.eghzwintergarten2
+        type: thermostat
+      - entity: climate.eghzesszimmer
+        type: thermostat
+      - entity: climate.eghzwohnzimmer1
+        type: thermostat
+      - entity: climate.eghzwohnzimmer2
+        type: thermostat
+      - entity: climate.eghzgarderobe
+        type: thermostat
+      - entity: climate.kghzdurchgang
+        type: thermostat
+      - entity: climate.kghzgaestezimmer
+        type: thermostat
+      - entity: climate.kghzsauna
+        type: thermostat
+      - entity: climate.oghzarbeitszimmer
+        type: thermostat
+      - entity: climate.oghzbad
+        type: thermostat
+      - entity: climate.oghzkinderzimmer
+        type: thermostat
+      - entity: climate.oghzschlafzimmer1
+        type: thermostat
+      - entity: climate.oghzschlafzimmer2
+        type: thermostat
+      - entity: climate.eghzwintergarten1
+        type: thermostat
+      - entity: climate.eghzwintergarten2
+        type: thermostat
+      - title: Automatiserungen
+        show_header_toggle: true
+        type: entities
+        entities:
+          - automation.egeventmotionflur1_off
+          - automation.egeventmotionflur1_on
+          - automation.ogeventmotiontreppe_off
+          - automation.ogeventmotiontreppenhaus_on
+          - automation.markise_down
+          - automation.markise_up
+          - automation.ssl_expiry_notification
+      - title: Wetter
+        show_header_toggle: true
+        type: entities
+        entities:
+          - sensor.solar_azimuth
+          - sensor.solar_elevation
+          - sensor.current_weather_cloud_coverage
+          - sensor.current_weather_condition
+          - sensor.current_weather_humidity
+          - sensor.current_weather_rain
+          - sensor.current_weather_temperature
+          - sensor.current_weather_wind_speed
+          - sensor.dwdweatherwarnings_advance_warning_level
+          - sensor.dwdweatherwarnings_current_warning_level
+          - sensor.weather_cloudiness
+          - sensor.weather_dewpoint_temperature
+          - sensor.weather_fog
+          - sensor.weather_high_clouds
+          - sensor.weather_humidity
+          - sensor.weather_low_clouds
+          - sensor.weather_medium_clouds
+          - sensor.weather_precipitation
+          - sensor.weather_pressure
+          - sensor.weather_symbol
+          - sensor.weather_temperature
+          - sensor.weather_wind_direction
+          - sensor.weather_wind_speed
+      - entity: weather.openweathermap
+        type: weather-forecast
+      - title: Buderus Heizung
+        show_header_toggle: true
+        type: entities
+        entities:
+          - sensor.buderus_boiler_flame
+          - sensor.buderus_boiler_starts
+          - sensor.buderus_heating_active_program
+          - sensor.buderus_heating_comfort_temperature
+          - sensor.buderus_heating_eco_temperature
+          - sensor.buderus_heating_manual_room_setpoint
+          - sensor.buderus_heating_operation_mode
+          - sensor.buderus_heating_room_setpoint
+          - sensor.buderus_heating_temporary_room_setpoint
+          - sensor.buderus_hotwater_setpoint
+          - sensor.buderus_hotwater_temperature
+          - sensor.buderus_hotwater_temperature_2
+          - sensor.buderus_hotwater_waterflow
+          - sensor.buderus_hotwater_workingtime
+          - sensor.buderus_modulation
+          - sensor.buderus_outside_temperature
+          - sensor.buderus_pump_modulation
+          - sensor.buderus_return_temperature
+          - sensor.buderus_room_temperature
+          - sensor.buderus_supply_temperature
+      - title: Devices at home
+        show_header_toggle: true
+        type: entities
+        entities:
+          - device_tracker.formobile
+          - device_tracker.judith
+      - title: Automatisierung
+        type: entities
+        entities:
+          - automation.og_badfenster_timer_starten
+          - automation.eingang_cam_snapshot_away
+          - automation.heizkoerper_auf_anwesend
+          - automation.og_flurtaster_unten
+          - automation.wohnzimmer_stehleuchten_taster
+          - automation.buderus_brennerstarts_reset
+          - automation.eingang_cam_snapshot_home
+          - automation.bwm_aussen_notify
+          - automation.anwesenheitssimulation_rest
+          - automation.buderus_brennerstarts
+          - automation.standheizung_timer_starten
+          - automation.og_event_motion_treppenhaus_on
+          - automation.eg_event_motion_flur1_on
+          - automation.og_badfenster_timer_abgelaufen
+          - automation.esszimmer_stehleuchten_taster
+          - automation.schwarze_tonne_notify
+          - automation.og_event_motion_treppe_off
+          - automation.blaue_tonne_notify
+          - automation.ifttt_webhook
+          - automation.bwm_innen_notify
+          - automation.anwesenheitssimulation_wohnzimmer
+          - automation.kellerfenster_timer_starten
+          - automation.eg_event_motion_flur1_off
+          - automation.heizkoerper_auf_abwesend
+          - automation.wassermelder_keller
+          - automation.kellerfenster_timer_abgelaufen
+          - automation.standheizung_timer_abgelaufen
+      - entity: camera.eingang
+        type: picture-entity
+      - entity: camera.garten
+        type: picture-entity
+      - entity: camera.schuppen
+        type: picture-entity
+      - entity: camera.tiengen
+        type: picture-entity
+      - title: ''
+        type: entities
+        entities:
+          - counter.buderus_starts
+          - counter.buderus_starts_today
+      - title: Verlaufsgrafik
+        type: entities
+        entities:
+          - history_graph.buderus_temperatur
+          - history_graph.temperature
+      - title: ''
+        type: entities
+        entities:
+          - homematic.ccu2
+      - title: Boolsche Eingabe
+        type: entities
+        entities:
+          - input_boolean.og_state_flur
+          - input_boolean.eg_state_flur1
+          - input_boolean.climate_away_temperature
+      - title: Licht
+        type: entities
+        entities:
+          - light.schlafzimmer
+          - light.on_off_plug_1
+          - light.fibaro_system_fgd212_dimmer_2_level_2
+          - light.fibaro_system_fgd212_dimmer_2_level_3
+          - light.fibaro_system_fgd212_dimmer_2_level
+          - light.on_off_plug_1_2
+          - light.fibaro_system_fgd212_dimmer_2_level_4
+          - light.kinderzimmer
+          - light.wintergarten
+      - entity: media_player.samsung_7_series_55_qe55q7fgm
+        type: media-control
+      - title: Schalter
+        type: entities
+        entities:
+          - switch.outdoorswaussenlicht2
+          - switch.outdoorswaussenlicht3
+          - switch.outdoorswaussenlicht1
+          - switch.standheizung
+      - title: Z-Wave
+        type: entities
+        entities:
+          - zwave.zwaveme_zme_uzb1_usb_stick
+          - zwave.fibaro_system_fgms001zw5_motion_sensor
+          - zwave.fibaro_system_fgd212_dimmer_2_2
+          - zwave.fibaro_system_fgd212_dimmer_2
+    badges:
+      - binary_sensor.meq1659102_state
+      - binary_sensor.outdoorbwmwest_motion
+      - binary_sensor.outdoorbwmnord_motion
+      - binary_sensor.fibaro_system_fgms001zw5_motion_sensor_sensor
+      - binary_sensor.keq0236832_motion
+      - binary_sensor.leq0612014_motion
+      - sensor.buderus_verbrauch_d
+      - sensor.kgstromzaehler_energy_counter
+      - sensor.fibaro_system_fgd212_dimmer_2_power_4
+      - sensor.fibaro_system_fgms001zw5_motion_sensor_burglar
+      - sensor.ipad_von_florian_battery_level
+      - sensor.fibaro_system_fgd212_dimmer_2_energy_2
+      - sensor.standheizung_voltage
+      - sensor.iphone_von_judith_daur_battery_state
+      - sensor.fibaro_system_fgd212_dimmer_2_power_3
+      - sensor.eg_waschkueche_temperatur
+      - sensor.fibaro_system_fgms001zw5_motion_sensor_seismic_intensity
+      - sensor.fibaro_system_fgd212_dimmer_2_sourcenodeid
+      - sensor.judith_battery_state
+      - sensor.eg_waschkueche_feuchte
+      - sensor.fibaro_system_fgd212_dimmer_2_power_management_2
+      - sensor.dwd_weather_warnings_current_warning_level
+      - sensor.kgstromzaehler_power
+      - sensor.standheizung_current
+      - sensor.kg_keller_temperatur
+      - sensor.leq0612014_brightness
+      - sensor.fibaro_system_fgd212_dimmer_2_alarm_type_2
+      - sensor.fibaro_system_fgms001zw5_motion_sensor_temperature
+      - sensor.fibaro_system_fgd212_dimmer_2_system
+      - sensor.fibaro_system_fgms001zw5_motion_sensor_luminance
+      - sensor.fibaro_system_fgd212_dimmer_2_alarm_level
+      - sensor.fibaro_system_fgd212_dimmer_2_heat
+      - sensor.ipad_von_florian_battery_state
+      - sensor.kg_keller_feuchte
+      - sensor.brennerlaufzeit_100prozent
+      - sensor.fibaro_system_fgd212_dimmer_2_power
+      - sensor.fibaro_system_fgms001zw5_motion_sensor_sourcenodeid
+      - sensor.fibaro_system_fgms001zw5_motion_sensor_alarm_type
+      - sensor.dwd_weather_warnings_advance_warning_level
+      - sensor.brennerlaufzeit_insgesamt
+      - sensor.formobile_battery_state
+      - sensor.standheizung_energy
+      - sensor.fibaro_system_fgd212_dimmer_2_system_2
+      - sensor.brennerlaufzeit_60prozent
+      - sensor.fibaro_system_fgd212_dimmer_2_sourcenodeid_2
+      - sensor.fibaro_system_fgms001zw5_motion_sensor_alarm_level
+      - sensor.kg_gaestezimmer_feuchte
+      - sensor.keq0236832_brightness
+      - sensor.fibaro_system_fgms001zw5_motion_sensor_general
+      - sensor.outdoorbwmwest_brightness
+      - sensor.ssl_cert_expiry
+      - sensor.outdoorbwmnord_brightness
+      - sensor.standheizung_power
+      - sensor.fibaro_system_fgd212_dimmer_2_power_2
+      - sensor.fibaro_system_fgd212_dimmer_2_power_management
+      - sensor.fibaro_system_fgd212_dimmer_2_alarm_type
+      - sensor.fibaro_system_fgd212_dimmer_2_exporting
+      - sensor.formobile_battery_level
+      - sensor.iphone_von_judith_daur_battery_level
+      - sensor.judith_battery_level
+      - sensor.kg_gaestezimmer_temperatur
+      - sensor.hmsecwds2_meq0585132_state
+      - sensor.fibaro_system_fgd212_dimmer_2_energy
+      - sensor.fibaro_system_fgd212_dimmer_2_exporting_2
+      - sensor.fibaro_system_fgd212_dimmer_2_alarm_level_2
+      - sensor.fibaro_system_fgd212_dimmer_2_heat_2
+      - sun.sun
+      - timer.eg_timer_flur1
+      - timer.og_timer_badefenster
+      - timer.kg_timer_saunafenster
+      - timer.og_timer_treppe
+      - timer.out_timer_standheizung
+  - title: Erdgeschoss
+    path: erdgeschoss
+    cards:
+      - title: Wohn-/Esszimmer
+        show_header_toggle: true
+        type: entities
+        entities:
+          - light.wohnzimmer
+          - light.wohnzimmer_decke
+          - light.wohnzimmer_tv
+          - light.stehleuchte1
+          - light.stehleuchte2
+          - light.stehleuchte3
+          - light.esszimmer
+          - light.esszimmer_decke
+          - remote.apple_tv
+          - sensor.eg_wohnzimmer_feuchte
+          - sensor.eg_wohnzimmer_temperatur
+      - entity: climate.eghzesszimmer
+        type: thermostat
+      - entity: climate.eghzwohnzimmer1
+        type: thermostat
+      - entity: climate.eghzwohnzimmer2
+        type: thermostat
+      - entity: media_player.samsung_q7f
+        type: media-control
+      - entity: media_player.apple_tv
+        type: media-control
+      - entity: media_player.judithflo
+        type: media-control
+      - title: Wintergarten
+        show_header_toggle: true
+        type: entities
+        entities:
+          - cover.keq0540906
+          - light.wintergarten1
+          - light.wintergarten2
+          - light.wintergarten3
+      - entity: climate.eghzwintergarten1
+        type: thermostat
+      - entity: climate.eghzwintergarten2
+        type: thermostat
+    badges:
+      - sensor.eg_waschkueche_feuchte
+      - sensor.eg_waschkueche_temperatur
+      - sensor.eg_temp_flur1
+      - sensor.eg_lux_flur1
+  - title: Untergeschoss
+    path: keller
+    cards:
+      - entity: climate.eghzesszimmer
+        type: thermostat
+      - entity: climate.eghzwohnzimmer1
+        type: thermostat
+      - entity: climate.eghzwohnzimmer2
+        type: thermostat
+      - entity: climate.eghzgarderobe
+        type: thermostat
+      - entity: climate.kghzdurchgang
+        type: thermostat
+      - entity: climate.kghzgaestezimmer
+        type: thermostat
+      - entity: climate.kghzsauna
+        type: thermostat
+      - entity: climate.oghzarbeitszimmer
+        type: thermostat
+      - entity: climate.oghzbad
+        type: thermostat
+      - entity: climate.oghzkinderzimmer
+        type: thermostat
+      - entity: climate.oghzschlafzimmer1
+        type: thermostat
+      - entity: climate.oghzschlafzimmer2
+        type: thermostat
+      - entity: climate.kghzgaestezimmer
+        type: thermostat
+      - title: Sauna
+        show_header_toggle: true
+        type: entities
+        entities:
+          - binary_sensor.kgfssauna_state
+      - entity: climate.kghzsauna
+        type: thermostat
+      - title: Badezimmer unten
+        show_header_toggle: true
+        type: entities
+        entities:
+          - switch.meq0327223
+    badges:
+      - sensor.kg_gaestezimmer_feuchte
+      - sensor.kg_gaestezimmer_temperatur
+      - sensor.kg_keller_feuchte
+      - sensor.kg_keller_temperatur
+      - sensor.kgstromzaehler_energy_counter
+      - sensor.kgstromzaehler_power
+  - title: Obergeschoss
+    path: oben
+    cards:
+      - title: Schlafzimmer
+        show_header_toggle: true
+        type: entities
+        entities:
+          - light.sz_nachttisch_flo
+          - light.sz_nachttisch_judith
+          - switch.neq0214472
+          - sensor.og_schlafzimmer_feuchte
+          - sensor.og_schlafzimmer_temperatur
+      - entity: climate.oghzschlafzimmer1
+        type: thermostat
+      - entity: climate.oghzschlafzimmer2
+        type: thermostat
+      - title: Kinderzimmer
+        show_header_toggle: true
+        type: entities
+        entities:
+          - switch.keq0944256
+          - sensor.og_kinderzimmer_feuchte
+          - sensor.og_kinderzimmer_temperatur
+      - entity: climate.oghzkinderzimmer
+        type: thermostat
+      - title: Arbeitszimmer
+        show_header_toggle: true
+        type: entities
+        entities:
+          - switch.keq0942817
+          - sensor.og_arbeitszimmer_feuchte
+          - sensor.og_arbeitszimmer_temperatur
+      - entity: climate.oghzarbeitszimmer
+        type: thermostat
+      - title: Badezimmer oben
+        show_header_toggle: true
+        type: entities
+        entities:
+          - switch.keq0944721
+          - sensor.og_bad_feuchte
+          - sensor.og_bad_temperatur
+      - entity: climate.oghzbad
+        type: thermostat
+      - entity: media_player.badezimmer
+        type: media-control
+    badges: []
+  - title: Server
+    path: server
+    cards:
+      - title: Devices at home
+        show_header_toggle: true
+        type: entities
+        entities:
+          - device_tracker.formobile
+          - device_tracker.judith
+    badges: []
+  - title: Draussen
+    path: outdoor
+    cards:
+      - entity: camera.eingang
+        type: picture-entity
+      - entity: camera.garten
+        type: picture-entity
+      - entity: camera.schuppen
+        type: picture-entity
+      - entity: camera.tiengen
+        type: picture-entity
+      - entity: camera.zerocam
+        type: picture-entity
+      - title: Schalter
+        type: entities
+        entities:
+          - switch.outdoorswaussenlicht1
+          - switch.outdoorswaussenlicht2
+          - switch.outdoorswaussenlicht3
+          - switch.standheizung
+    badges:
+      - binary_sensor.outdoorbwmnord_motion
+      - binary_sensor.outdoorbwmwest_motion
+      - sensor.outdoorbwmnord_brightness
+      - sensor.outdoorbwmwest_brightness

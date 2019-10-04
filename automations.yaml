@@ -1,0 +1,676 @@
+- alias: OG.EVENT.Motion.Treppenhaus_On
+  initial_state: true
+  trigger:
+  - entity_id: binary_sensor.fibaro_system_fgms001zw5_motion_sensor_sensor
+    from: 'off'
+    platform: state
+    to: 'on'
+  condition:
+  - condition: or
+    conditions:
+    - condition: sun
+      after: sunset
+    - condition: sun
+      before: sunrise
+    - below: '30'
+      condition: numeric_state
+      entity_id: sensor.fibaro_system_fgms001zw5_motion_sensor_luminance
+  action:
+  - service: timer.start
+    data:
+      entity_id: timer.og_timer_treppe
+      duration: 00:03:00
+  - service: light.turn_on
+    data:
+      entity_id: light.fibaro_system_fgd212_dimmer_2_level_4
+      brightness: 100
+  - service: timer.start
+    data:
+      entity_id: timer.og_timer_kizi
+      duration: 00:20:00
+  - service: light.turn_on
+    data:
+      entity_id: light.extended_color_light_1
+      brightness: 177
+      color_temp: 404
+  - service: light.turn_on
+    data:
+      entity_id:  light.on_off_plug_1_2
+  id: 736b364077ec43d983420653e70cb47b
+
+- alias: OG.EVENT.Motion.KiZi_Off
+  initial_state: true
+  trigger:
+  - platform: event
+    event_type: timer.finished
+    event_data:
+      entity_id: timer.og_timer_kizi
+  condition:
+  action:
+  - data:
+      entity_id: light.extended_color_light_1
+    service: light.turn_off
+  - data:
+      entity_id: light.on_off_plug_1_2
+    service: light.turn_off
+  
+
+
+- alias: OG.EVENT.Motion.Treppe_Off
+  initial_state: true
+  trigger:
+  - platform: event
+    event_type: timer.finished
+    event_data:
+      entity_id: timer.og_timer_treppe
+  condition:
+  action:
+  - data:
+      entity_id: light.fibaro_system_fgd212_dimmer_2_level_4
+    service: light.turn_off
+  - service: input_boolean.turn_off
+    data:
+      entity_id: input_boolean.og_state_flur
+  id: 5a00138120e14d8987d94b5a76d2f554
+- alias: EG.EVENT.Motion.Flur1_On
+  initial_state: true
+  trigger:
+  - entity_id: binary_sensor.motion_eg_bwm_flur1
+    from: 'off'
+    platform: state
+    to: 'on'
+  condition:
+  - condition: or
+    conditions:
+    - condition: sun
+      after: sunset
+    - condition: sun
+      before: sunrise
+  action:
+  - service: timer.start
+    data:
+      entity_id: timer.eg_timer_flur1
+      duration: 00:03:00
+  - service: light.turn_on
+    data:
+      entity_id: light.fibaro_system_fgd212_dimmer_2_level_2
+      brightness: 20
+  - service: input_boolean.turn_on
+    data:
+      entity_id: input_boolean.eg_state_flur1
+  id: 6a88587bb51b402d8f62a25c7a92e077
+- alias: EG.EVENT.Motion.Flur1_Off
+  initial_state: true
+  trigger:
+  - platform: event
+    event_type: timer.finished
+    event_data:
+      entity_id: timer.eg_timer_flur1
+  condition:
+  - condition: state
+    entity_id: input_boolean.eg_state_flur1
+    state: 'on'
+  action:
+  - service: light.turn_off
+    data:
+      entity_id: light.fibaro_system_fgd212_dimmer_2_level_2
+  - service: input_boolean.turn_off
+    data:
+      entity_id: input_boolean.eg_state_flur1
+  id: bee7f0dad4f84822a21b9015831f0739
+- alias: Markise up
+  initial_state: 'on'
+  trigger:
+  - platform: sun
+    event: sunset
+    offset: -00:45:00
+  - platform: numeric_state
+    entity_id: sensor.current_weather_wind_speed
+    above: 5
+    for:
+      minutes: 10
+  - platform: numeric_state
+    entity_id: sensor.weather_precipitation
+    above: 0.3
+    for:
+      minutes: 5
+  - platform: numeric_state
+    entity_id: sensor.current_weather_cloud_coverage
+    above: 85
+    for:
+      minutes: 5
+  condition:
+  - condition: state
+    entity_id: cover.keq0540906
+    state: closed
+  action:
+  - service: cover.set_cover_position
+    data:
+      entity_id: cover.keq0540906
+      position: 100
+  - service: notify.telegram_notify
+    data:
+      message: Markise wird eingefahren
+  id: 50e6fe2181514fa1b6ad1b0ce3e0c5ba
+- alias: Markise down
+  initial_state: 'on'
+  trigger:
+    platform: state
+    entity_id: sun.sun
+  condition:
+    condition: and
+    conditions:
+    - condition: numeric_state
+      entity_id: sun.sun
+      value_template: '{{ state.attributes.elevation }}'
+      above: 0
+    - condition: state
+      entity_id: cover.keq0540906
+      state: open
+      for:
+        minutes: 30
+    - condition: sun
+      before: sunset
+      before_offset: -01:30:00
+    - condition: sun
+      after: sunrise
+      after_offset: 04:00:00
+    - condition: numeric_state
+      entity_id: sensor.current_weather_wind_speed
+      below: 4
+    - condition: numeric_state
+      entity_id: sensor.weather_precipitation
+      below: 0.1
+    - condition: template
+      value_template: '{{ now().month > 2 }}'
+    - condition: template
+      value_template: '{{ now().month < 11 }}'
+    - condition: numeric_state
+      entity_id: sensor.current_weather_cloud_coverage
+      below: 45
+    - condition: numeric_state
+      entity_id: sensor.current_weather_temperature
+      above: 20
+  action:
+  - service: cover.set_cover_position
+    data:
+      entity_id: cover.keq0540906
+      position: 0
+  - service: notify.telegram_notify
+    data:
+      message: Markise wird ausgefahren
+  id: b8dfe54b928641adb213ac9582f71e03
+- alias: SSL expiry notification
+  initial_state: true
+  trigger:
+    platform: numeric_state
+    entity_id: sensor.ssl_cert_expiry
+    below: 21
+  action:
+    service: notify.telegram_notify
+    data:
+      message: Warning - SSL certificate expires in 21 days and has not been automatically
+        renewed
+  id: 584bfeb359134b77be6b336365956655
+
+
+- alias: Eingang Cam Snapshot Home
+  initial_state: true
+  trigger:
+    platform: state
+    entity_id: binary_sensor.outdoorbwmnord_motion
+    to: 'on'
+  action:
+  - delay:
+      seconds: 2
+  - service: shell_command.ipcam1_jpeg
+  - delay:
+      seconds: 1
+  - service: shell_command.ipcam1_mp4
+  - delay:
+      seconds: 2
+  - service: notify.telegram_notify
+    data:
+      message: ''
+      data:
+        photo:
+        - file: /tmp/cam_captures/output1.jpeg
+
+- alias: Eingang Cam Snapshot
+  initial_state: true
+  trigger:
+    platform: state
+    entity_id: binary_sensor.outdoorbwmnord_motion
+    to: 'on'
+  condition:
+    - condition: state
+      entity_id: group.family
+      state: not_home
+  action:
+  - delay:
+      seconds: 240
+  - service: notify.telegram_notify
+    data:
+      message: ''
+      data:
+        video:
+        - file: /tmp/cam_captures/output1.mp4
+  id: 217edb2cedef4dd2aac0ec1be9cb55a6
+- alias: BWM Aussen Notify
+  initial_state: false
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.keq0236832_motion
+    to: 'on'
+  - platform: state
+    entity_id: binary_sensor.outdoorbwmwest_motion
+    to: 'on'
+  condition:
+    condition: and
+    conditions:
+    - condition: state
+      entity_id: group.family
+      state: not_home
+  action:
+  - service: notify.telegram_notify
+    data:
+      message: Bewegung Aussen West oder Mobil
+  id: 7437c55945cf44b9973b7a0e8755544d
+- alias: BWM Innen Notify
+  initial_state: false
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.fibaro_system_fgms001zw5_motion_sensor_sensor
+    to: 'on'
+  - platform: state
+    entity_id: sensor.motion_eg_bwm_flur1
+    to: 'on'
+  condition:
+    condition: and
+    conditions:
+    - condition: state
+      entity_id: group.family
+      state: not_home
+  action:
+  - service: notify.telegram_notify
+    data:
+      message: Bewegung Innen oben oder unten
+  id: f0d9829fb38f4b4abcbc41f4e0c7dedf
+- alias: Wassermelder Keller
+  initial_state: true
+  trigger:
+  - platform: state
+    entity_id: sensor.hmsecwds2_meq0585132_state
+  action:
+  - service: notify.telegram_notify
+    data:
+      message: Wassermelder im Keller hat angesprochen!!!
+  id: a17e520b3fda41a7b1d33e7407afc5bf
+- alias: Wohnzimmer Stehleuchten Taster
+  initial_state: true
+  hide_entity: false
+  trigger:
+  - platform: event
+    event_type: homematic.keypress
+    event_data:
+      name: LEQ0175317
+      channel: 1
+      param: PRESS_SHORT
+  - platform: event
+    event_type: homematic.keypress
+    event_data:
+      name: EG.SWT.Wohnzimmer
+      channel: 1
+      param: PRESS_SHORT
+  action:
+    service: light.toggle
+    entity_id:
+    - light.stehleuchte1
+    - light.stehleuchte2
+  id: 7767e3b86038405bb2d44ec4ffd947d9
+- alias: Esszimmer Stehleuchten Taster
+  initial_state: true
+  hide_entity: false
+  trigger:
+  - platform: event
+    event_type: homematic.keypress
+    event_data:
+      name: LEQ0175317
+      channel: 2
+      param: PRESS_SHORT
+  - platform: event
+    event_type: homematic.keypress
+    event_data:
+      name: EG.SWT.Wohnzimmer
+      channel: 2
+      param: PRESS_SHORT
+  action:
+    service: light.toggle
+    entity_id: light.stehleuchte3
+  id: 42e57f4b6fac4abcb39f92c1c915c604
+- alias: OG Flurtaster unten
+  initial_state: true
+  hide_entity: false
+  trigger:
+    platform: event
+    event_type: homematic.keypress
+    event_data:
+      name: OG.SWT.Treppenhaus
+      channel: 1
+      param: PRESS_SHORT
+  action:
+  - service: light.toggle
+    data:
+      entity_id: light.fibaro_system_fgd212_dimmer_2_level_4
+  - service: timer.cancel
+    data:
+      entity_id: timer.og_timer_treppe
+  id: f05631232ce148cbab85817e2fbc2bd7
+- alias: IFTTT webhook
+  initial_state: true
+  trigger:
+    platform: event
+    event_type: ifttt_webhook_received
+    event_data:
+      action: call_service
+  action:
+    service_template: '{{ trigger.event.data.service }}'
+    data_template:
+      entity_id: '{{ trigger.event.data.entity_id }}'
+  id: 5dbd6527a1f24a7bb008d3b86cf9a791
+- alias: Schwarze Tonne Notify
+  initial_state: true
+  hide_entity: false
+  trigger:
+    platform: time
+    at: 07:30:00
+  action:
+  - service: notify.iphones
+    data:
+      title: Schwarze Tonne
+      message: Schwarze Tonne wird heute geleert!
+      data:
+        push:
+          badge: 5
+  condition:
+  - condition: state
+    entity_id: calendar.hass_schwarze_tonne
+    state: 'on'
+  id: cca5ca6a18c5431db87eecc61b7e6c32
+- alias: Blaue Tonne Notify
+  initial_state: true
+  hide_entity: false
+  trigger:
+    platform: time
+    at: 07:30:00
+  action:
+  - service: notify.iphones
+    data:
+      title: Blaue Tonne
+      message: Blaue Tonne wird heute geleert!
+      data:
+        push:
+          badge: 5
+  condition:
+  - condition: state
+    entity_id: calendar.hass_blaue_tonne
+    state: 'on'
+  id: 519ddfa3f57f4f2b9c9485cad905602c
+- alias: Standheizung Timer starten
+  initial_state: true
+  trigger:
+  - entity_id: switch.standheizung
+    platform: state
+    to: 'on'
+  condition: []
+  action:
+  - service: timer.start
+    data:
+      entity_id: timer.out_timer_standheizung
+      duration: 00:45:00
+  
+- alias: Standheizung Timer abgelaufen
+  initial_state: true
+  trigger:
+  - platform: event
+    event_type: timer.finished
+    event_data:
+      entity_id: timer.out_timer_standheizung
+  condition:
+  - condition: state
+    entity_id: switch.standheizung
+    state: 'on'
+  action:
+  - service: switch.turn_off
+    data:
+      entity_id: switch.standheizung
+  - service: notify.telegram_notify
+    data:
+      message: Standheizungstimer abgelaufen
+  id: 1d0ddf683d6c46b781101c7485aee4c6
+- alias: Heizkoerper auf Abwesend
+  initial_state: true
+  trigger:
+  - entity_id: input_boolean.climate_away_temperature
+    to: 'on'
+    platform: state
+  condition:
+  action:
+  - service: climate.set_operation_mode
+    data:
+      entity_id:
+      - group.heizung
+      operation_mode: manual
+  - service: climate.set_temperature
+    data:
+      entity_id:
+      - group.heizung
+      temperature: 15
+- alias: Heizkoerper auf Anwesend
+  initial_state: true
+  trigger:
+  - entity_id: input_boolean.climate_away_temperature
+    to: 'off'
+    platform: state
+  condition:
+  action:
+  - service: climate.set_operation_mode
+    data:
+      entity_id:
+      - group.heizung
+      operation_mode: auto
+  - service: climate.set_temperature
+    data:
+      entity_id:
+      - group.heizung
+      temperature: 20
+
+- alias: Anwesenheitssimulation Wohnzimmer
+  initial_state: false
+  trigger:
+    - platform: state
+      entity_id: group.family
+      from: 'home'
+      to: 'not_home'
+    - platform: state
+      entity_id: 'sun.sun'
+      to: 'below_horizon'
+  condition:
+    condition: and
+    conditions:
+    - condition: state
+      entity_id: 'sun.sun'
+      state: 'below_horizon'
+    - condition: time
+      before: '23:01:00'
+    - condition: state
+      entity_id: group.family
+      state: 'not_home'
+  action:
+  - delay: '00:{{ range(1,15) | random | int }}:00'
+  - service: light.turn_on
+    data:
+      entity_id:
+        - light.stehleuchte1 
+        - light.stehleuchte2
+        - light.stehleuchte3
+  # wait
+  - delay: '0{{ (range(1, 5) | random | int ) }}:{{ (range(10, 50) | random | int ) }}:00'
+  - service: light.turn_off
+    data:
+      entity_id:
+        - light.stehleuchte1 
+        - light.stehleuchte2
+        - light.stehleuchte3
+
+- alias: Anwesenheitssimulation Rest
+  initial_state: false
+  trigger:
+    - platform: state
+      entity_id: group.family
+      from: 'home'
+      to: 'not_home'
+    - platform: state
+      entity_id: 'sun.sun'
+      to: 'below_horizon'
+    - platform: event
+      event_type: event_simulate_presence
+  condition:
+    condition: and
+    conditions:
+    - condition: state
+      entity_id: 'sun.sun'
+      state: 'below_horizon'
+    - condition: time
+      before: '23:01:00'
+    - condition: state
+      entity_id: group.family
+      state: 'not_home'
+  action:
+  - delay: '00:{{ range(1,15) | random | int }}:00'
+  - service: light.turn_on
+    data:
+      entity_id:
+        - light.sz_nachttisch_flo
+        - light.fibaro_system_fgd212_dimmer_2_level_4
+        - light.fibaro_system_fgd212_dimmer_2_level_2
+  # wait
+  - delay: '00:{{ (range(10, 50) | random | int ) }}:00'
+  - service: light.turn_off
+    data:
+      entity_id:
+        - light.sz_nachttisch_flo
+        - light.fibaro_system_fgd212_dimmer_2_level_4
+        - light.fibaro_system_fgd212_dimmer_2_level_2
+   # wait a little bit before turning on another lamp
+  - delay: '00:{{ (range(10, 50) | random) }}:00'  
+  # generate an event to call again this automation rule
+  - event: event_simulate_presence
+  
+  
+- alias: Buderus Brennerstarts
+  initial_state: 'on'
+  trigger:
+  - platform: state
+    entity_id: sensor.buderus_boiler_flame
+    from: 'off'
+    to: 'on'
+  action:
+  - service: counter.increment
+    data:
+      entity_id: 
+        - counter.buderus_starts
+        - counter.buderus_starts_today
+
+- alias: Buderus Brennerstarts reset
+  initial_state: true
+  hide_entity: false
+  trigger:
+    platform: time
+    at: '23:59:59'
+  action:
+  - service: counter.reset
+    data:
+      entity_id: counter.buderus_starts_today
+        
+- alias: Kellerfenster Timer starten
+  initial_state: true
+  trigger:
+  - entity_id: binary_sensor.kgfssauna_state
+    platform: state
+    to: 'on'
+  condition: []
+  action:
+  - service: timer.start
+    data:
+      entity_id: timer.kg_timer_saunafenster
+      duration: 00:45:00
+
+- alias: OG Badfenster Timer starten
+  initial_state: true
+  trigger:
+  - entity_id: binary_sensor.meq1659102_state
+    platform: state
+    to: 'on'
+  condition: []
+  action:
+  - service: timer.start
+    data:
+      entity_id: timer.og_timer_badefenster
+      duration: 00:45:00      
+    
+- alias: OG Badfenster Timer abgelaufen
+  initial_state: true
+  trigger:
+  - platform: event
+    event_type: timer.finished
+    event_data:
+      entity_id: timer.og_timer_badefenster
+  condition:
+  - condition: state
+    entity_id: binary_sensor.meq1659102_state
+    state: 'on'
+  action:
+  - service: notify.telegram_notify
+    data:
+      message: Fenster im Badezimmer oben noch offen
+  - service: notify.iphones
+    data:
+      title: Badezimmer
+      message: Fenster im Badezimmer oben noch offen!
+      data:
+        push:
+          badge: 5
+  - service: timer.start
+    data:
+      entity_id: timer.og_timer_badefenster
+      duration: 00:45:00
+
+      
+- alias: Kellerfenster Timer abgelaufen
+  initial_state: true
+  trigger:
+  - platform: event
+    event_type: timer.finished
+    event_data:
+      entity_id: timer.kg_timer_saunafenster
+  condition:
+  - condition: state
+    entity_id: binary_sensor.kgfssauna_state
+    state: 'on'
+  action:
+  - service: notify.telegram_notify
+    data:
+      message: Kellerfenster noch offen
+  - service: notify.iphones
+    data:
+      title: Saunafenster
+      message: Saunafenster noch offen!
+      data:
+        push:
+          badge: 5
+  - service: timer.start
+    data:
+      entity_id: timer.kg_timer_saunafenster
+      duration: 00:45:00
+      

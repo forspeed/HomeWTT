@@ -1,0 +1,19 @@
+- platform: generic
+  still_image_url: !secret cam_garten_url
+  name: Garten
+- platform: generic
+  still_image_url: !secret cam_eingang_url
+  name: Eingang
+
+- platform: generic
+  still_image_url: !secret cam_schuppen_url
+  name: Schuppen
+- platform: generic
+  still_image_url: !secret cam_wtt 
+  name: Tiengen
+- platform: mjpeg
+  mjpeg_url: http://192.168.178.10:8081/
+  still_image_url: http://192.168.178.10:8081/current
+  username: !secret userbase
+  password: !secret basic_standard
+  name: Zerocam
