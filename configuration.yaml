@@ -32,8 +32,8 @@ lovelace:
 
   
 http:
-  ssl_certificate: !secret ssl_certificate_path
-  ssl_key: !secret ssl_key_path
+  ssl_certificate: /etc/letsencrypt/live/hass/fullchain.pem
+  ssl_key: /etc/letsencrypt/live/hass/privkey.pem
   base_url: !secret external_url     
      
 hue:
@@ -76,6 +76,8 @@ logger:
     homeassistant.components.http: debug
     homeassistant.components.websocket_api: error
    
+system_health:
+
 # Example configuration.yaml entry with exclude
 recorder:
   purge_keep_days: 10
@@ -189,8 +191,6 @@ homematic:
       username: Admin
       password: !secret basic_standard2
  
- #     password: !secret pw_homematic
-
 # Example configuration.yaml entry for the Telegram Bot
 telegram_bot:
   - platform: polling
@@ -215,13 +215,6 @@ notify:
 #    name: Samsung Q7F
 #    port: 8001
 #    mac: 7C:64:56:71:79:40
-
-panel_iframe:
-  configurator:
-    title: Configurator
-    icon: mdi:wrench
-    url: http://hassio.local:3218
-
 
 weather:
   - platform: openweathermap

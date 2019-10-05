@@ -139,8 +139,4 @@ binary_sensor.leq0612014_motion:
   
 sensor.leq0612014_brightness:
   friendly_name: Outdoor.LUM.Ost
-
-binary_sensor.keq0236832_motion:
-  friendly_name: Outdoor.BWM.Mobil
-
   
