@@ -25,10 +25,10 @@ keller:
     - sensor.kg_gaestezimmer_temperatur
     - sensor.kg_keller_feuchte
     - sensor.kg_keller_temperatur
-    - sensor.kgstromzaehler_energy_counter
-    - sensor.kgstromzaehler_gas_energy_counter
-    - sensor.kgstromzaehler_gas_power
-    - sensor.kgstromzaehler_power
+    - sensor.kg_stromzaehler_energy_counter
+    - sensor.kg_stromzaehler_gas_energy_counter
+    - sensor.kg_stromzaehler_gas_power
+    - sensor.kg_stromzaehler_power
 
 oben:
   name: Obergeschoss
@@ -51,9 +51,9 @@ schlafzimmer:
   entities:
     - light.sz_nachttisch_flo
     - light.sz_nachttisch_judith
-    - climate.oghzschlafzimmer1
-    - climate.oghzschlafzimmer2
-    - switch.neq0214472
+    - climate.og_hz_schlafzimmer1
+    - climate.og_hz_schlafzimmer2
+    - switch.og_swt_schlafzimmer
     - sensor.og_schlafzimmer_feuchte
     - sensor.og_schlafzimmer_temperatur
 
@@ -61,18 +61,20 @@ kinderzimmer:
   name: Kinderzimmer
   view: no
   entities:
-    - climate.oghzkinderzimmer
-    - switch.keq0944256
+    - climate.og_hz_kinderzimmer
+    - switch.og_swt_kinderzimmer
     - sensor.og_kinderzimmer_feuchte
     - sensor.og_kinderzimmer_temperatur
-    - light.extended_color_light_1
+    - light.kz_wolke1
+    - light.kz_steckdose1
+    - light.kz_steckdose2
 
 arbeitszimmer:
   name: Arbeitszimmer
   view: no
   entities:
-    - climate.oghzarbeitszimmer
-    - switch.keq0942817
+    - climate.og_hz_arbeitszimmer
+    - switch.og_swt_arbeitszimmer
     - sensor.og_arbeitszimmer_feuchte
     - sensor.og_arbeitszimmer_temperatur
 
@@ -85,22 +87,22 @@ sauna:
   name: Sauna
   view: no
   entities:
-    - binary_sensor.kgfssauna_state
-    - climate.kghzsauna
+    - binary_sensor.kg_fs_sauna_state
+    - climate.kg_hz_sauna
 
 badug:
   name: Badezimmer unten
   view: no
   entities:
-    - switch.meq0327223
+    - switch.kg_sw_bad
 
 badog:
   name: Badezimmer oben
   view: no
   entities:
-    - climate.oghzbad
+    - climate.og_hz_bad
     - media_player.badezimmer
-    - switch.keq0944721
+    - switch.og_swt_badezimmer
     - sensor.og_bad_feuchte
     - sensor.og_bad_temperatur
 
@@ -108,15 +110,15 @@ gaeste:
   name: Gästezimmer
   view: no
   entities:
-    - climate.kghzgaestezimmer
+    - climate.kg_hz_gaestezimmer
 
 wohnzimmer:
   name: Wohn-/Esszimmer
   view: no
   entities:
-    - climate.eghzesszimmer
-    - climate.eghzwohnzimmer1
-    - climate.eghzwohnzimmer2
+    - climate.eg_hz_esszimmer
+    - climate.eg_hz_wohnzimmer1
+    - climate.eg_hz_wohnzimmer2
     - light.wohnzimmer
     - light.wohnzimmer_decke
     - light.wohnzimmer_tv
@@ -141,9 +143,9 @@ wintergarten:
   name: Wintergarten
   view: no
   entities:
-    - cover.keq0540906
-    - climate.eghzwintergarten1
-    - climate.eghzwintergarten2
+    - cover.eg_bl_wintergarten
+    - climate.eg_hz_wintergarten1
+    - climate.eg_hz_wintergarten2
     - light.wintergarten1
     - light.wintergarten2
     - light.wintergarten3
@@ -152,25 +154,25 @@ heizung:
   name: Thermostate Wohnraum
   view: no
   entities:
-    - climate.eghzesszimmer
-    - climate.eghzwohnzimmer1
-    - climate.eghzwohnzimmer2
-    - climate.eghzgarderobe
-    - climate.kghzdurchgang
-    - climate.kghzgaestezimmer
-    - climate.kghzsauna
-    - climate.oghzarbeitszimmer
-    - climate.oghzbad
-    - climate.oghzkinderzimmer
-    - climate.oghzschlafzimmer1
-    - climate.oghzschlafzimmer2
+    - climate.eg_hz_esszimmer
+    - climate.eg_hz_wohnzimmer1
+    - climate.eg_hz_wohnzimmer2
+    - climate.eg_hz_garderobe
+    - climate.kg_hz_durchgang
+    - climate.kg_hz_gaestezimmer
+    - climate.kg_hz_sauna
+    - climate.og_hz_arbeitszimmer
+    - climate.og_hz_bad
+    - climate.og_hz_kinderzimmer
+    - climate.og_hz_schlafzimmer1
+    - climate.og_hz_schlafzimmer2
     
 heizung_wiga:
   name: Thermostate Wintergarten
   view: no
   entities: 
-    - climate.eghzwintergarten1
-    - climate.eghzwintergarten2
+    - climate.eg_hz_wintergarten1
+    - climate.eg_hz_wintergarten2
   
 
 
@@ -183,28 +185,29 @@ outdoor:
     - camera.schuppen
     - camera.tiengen
     - camera.zerocam
-    - switch.outdoorswaussenlicht1
-    - switch.outdoorswaussenlicht2
-    - switch.outdoorswaussenlicht3
-    - sensor.outdoorbwmnord_brightness
-    - sensor.outdoorbwmwest_brightness
-    - binary_sensor.outdoorbwmnord_motion
-    - binary_sensor.outdoorbwmwest_motion
-    - binary_sensor.keq0236832_motion
+    - switch.outdoor_sw_aussenlicht1
+    - switch.outdoor_sw_aussenlicht2
+    - switch.outdoor_sw_aussenlicht3
+    - sensor.outdoor_bwm_nord_brightness
+    - sensor.outdoor_bwm_west_brightness
+    - binary_sensor.outdoor_bwm_nord_motion
+    - binary_sensor.outdoor_bwm_west_motion
+    - binary_sensor.outdoor_bwm_sued_motion
+    - binary_sensor.outdoor_bwm_mobil_motion
     - switch.standheizung
-    - sensor.standheizungcurrent
-    - sensor.standheizungenergy
-    - sensor.standheizungpower
-    - sensor.standheizungvoltage
+    - sensor.standheizung_current
+    - sensor.standheizung_energy
+    - sensor.standheizung_power
+    - sensor.standheizung_voltage
 
 automation:
   name: Automatiserungen
   view: no
   entities:
-    - automation.egeventmotionflur1_off
-    - automation.egeventmotionflur1_on
-    - automation.ogeventmotiontreppe_off
-    - automation.ogeventmotiontreppenhaus_on
+    - automation.eg_event_motion_flur1_off
+    - automation.eg_event_motion_flur1_on
+    - automation.og_event_motion_treppe_off
+    - automation.og_event_motion_treppenhaus_on
     - automation.markise_down
     - automation.markise_up
     - automation.ssl_expiry_notification
@@ -221,8 +224,8 @@ weather:
     - sensor.current_weather_rain
     - sensor.current_weather_temperature
     - sensor.current_weather_wind_speed
-    - sensor.dwdweatherwarnings_advance_warning_level
-    - sensor.dwdweatherwarnings_current_warning_level
+    - sensor.dwd_weather_warnings_advance_warning_level
+    - sensor.dwd_weather_warnings_current_warning_level
     - sensor.weather_cloudiness
     - sensor.weather_dewpoint_temperature
     - sensor.weather_fog

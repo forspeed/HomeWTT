@@ -1,7 +1,7 @@
 - alias: OG.EVENT.Motion.Treppenhaus_On
   initial_state: true
   trigger:
-  - entity_id: binary_sensor.fibaro_system_fgms001zw5_motion_sensor_sensor
+  - entity_id: binary_sensor.fibaro_system_fgms001_zw5_motion_sensor_sensor
     from: 'off'
     platform: state
     to: 'on'
@@ -14,7 +14,7 @@
       before: sunrise
     - below: '30'
       condition: numeric_state
-      entity_id: sensor.fibaro_system_fgms001zw5_motion_sensor_luminance
+      entity_id: sensor.fibaro_system_fgms001_zw5_motion_sensor_luminance
   action:
   - service: timer.start
     data:
@@ -30,12 +30,12 @@
       duration: 00:20:00
   - service: light.turn_on
     data:
-      entity_id: light.extended_color_light_1
+      entity_id: light.kz_wolke1
       brightness: 177
       color_temp: 404
   - service: light.turn_on
     data:
-      entity_id:  light.on_off_plug_1_2
+      entity_id:  light.kz_steckdose2
   id: 736b364077ec43d983420653e70cb47b
 
 - alias: OG.EVENT.Motion.KiZi_Off
@@ -48,10 +48,10 @@
   condition:
   action:
   - data:
-      entity_id: light.extended_color_light_1
+      entity_id: light.kz_wolke1
     service: light.turn_off
   - data:
-      entity_id: light.on_off_plug_1_2
+      entity_id: light.kz_steckdose2
     service: light.turn_off
   
 
@@ -72,10 +72,11 @@
     data:
       entity_id: input_boolean.og_state_flur
   id: 5a00138120e14d8987d94b5a76d2f554
+
 - alias: EG.EVENT.Motion.Flur1_On
   initial_state: true
   trigger:
-  - entity_id: binary_sensor.motion_eg_bwm_flur1
+  - entity_id: binary_sensor.eg_bwm_flur1_motion
     from: 'off'
     platform: state
     to: 'on'
@@ -93,12 +94,13 @@
       duration: 00:03:00
   - service: light.turn_on
     data:
-      entity_id: light.fibaro_system_fgd212_dimmer_2_level_2
+      entity_id: light.fibaro_system_fgd212_dimmer_2_level_3
       brightness: 20
   - service: input_boolean.turn_on
     data:
       entity_id: input_boolean.eg_state_flur1
   id: 6a88587bb51b402d8f62a25c7a92e077
+
 - alias: EG.EVENT.Motion.Flur1_Off
   initial_state: true
   trigger:
@@ -113,11 +115,12 @@
   action:
   - service: light.turn_off
     data:
-      entity_id: light.fibaro_system_fgd212_dimmer_2_level_2
+      entity_id: light.fibaro_system_fgd212_dimmer_2_level_3
   - service: input_boolean.turn_off
     data:
       entity_id: input_boolean.eg_state_flur1
   id: bee7f0dad4f84822a21b9015831f0739
+
 - alias: Markise up
   initial_state: 'on'
   trigger:
@@ -141,17 +144,18 @@
       minutes: 5
   condition:
   - condition: state
-    entity_id: cover.keq0540906
+    entity_id: cover.eg_bl_wintergarten
     state: closed
   action:
   - service: cover.set_cover_position
     data:
-      entity_id: cover.keq0540906
+      entity_id: cover.eg_bl_wintergarten
       position: 100
   - service: notify.telegram_notify
     data:
       message: Markise wird eingefahren
   id: 50e6fe2181514fa1b6ad1b0ce3e0c5ba
+
 - alias: Markise down
   initial_state: 'on'
   trigger:
@@ -165,7 +169,7 @@
       value_template: '{{ state.attributes.elevation }}'
       above: 0
     - condition: state
-      entity_id: cover.keq0540906
+      entity_id: cover.eg_bl_wintergarten
       state: open
       for:
         minutes: 30
@@ -194,7 +198,7 @@
   action:
   - service: cover.set_cover_position
     data:
-      entity_id: cover.keq0540906
+      entity_id: cover.eg_bl_wintergarten
       position: 0
   - service: notify.telegram_notify
     data:
@@ -218,7 +222,7 @@
   initial_state: true
   trigger:
     platform: state
-    entity_id: binary_sensor.outdoorbwmnord_motion
+    entity_id: binary_sensor.outdoor_bwm_nord_motion
     to: 'on'
   action:
   - delay:
@@ -240,7 +244,7 @@
   initial_state: true
   trigger:
     platform: state
-    entity_id: binary_sensor.outdoorbwmnord_motion
+    entity_id: binary_sensor.outdoor_bwm_nord_motion
     to: 'on'
   condition:
     - condition: state
@@ -260,10 +264,10 @@
   initial_state: false
   trigger:
   - platform: state
-    entity_id: binary_sensor.keq0236832_motion
+    entity_id: binary_sensor.outdoor_bwm_sued_motion
     to: 'on'
   - platform: state
-    entity_id: binary_sensor.outdoorbwmwest_motion
+    entity_id: binary_sensor.outdoor_bwm_west_motion
     to: 'on'
   condition:
     condition: and
@@ -280,10 +284,10 @@
   initial_state: false
   trigger:
   - platform: state
-    entity_id: binary_sensor.fibaro_system_fgms001zw5_motion_sensor_sensor
+    entity_id: binary_sensor.fibaro_system_fgms001_zw5_motion_sensor_sensor
     to: 'on'
   - platform: state
-    entity_id: sensor.motion_eg_bwm_flur1
+    entity_id: binary_sensor.eg_bwm_flur1_motion
     to: 'on'
   condition:
     condition: and
@@ -300,7 +304,7 @@
   initial_state: true
   trigger:
   - platform: state
-    entity_id: sensor.hmsecwds2_meq0585132_state
+    entity_id: sensor.hm_sec_wds_2_meq0585132_state
   action:
   - service: notify.telegram_notify
     data:
@@ -596,7 +600,7 @@
 - alias: Kellerfenster Timer starten
   initial_state: true
   trigger:
-  - entity_id: binary_sensor.kgfssauna_state
+  - entity_id: binary_sensor.kg_fs_sauna_state
     platform: state
     to: 'on'
   condition: []
@@ -609,7 +613,7 @@
 - alias: OG Badfenster Timer starten
   initial_state: true
   trigger:
-  - entity_id: binary_sensor.meq1659102_state
+  - entity_id: binary_sensor.hm_sec_sco_meq1659102_state
     platform: state
     to: 'on'
   condition: []
@@ -628,7 +632,7 @@
       entity_id: timer.og_timer_badefenster
   condition:
   - condition: state
-    entity_id: binary_sensor.meq1659102_state
+    entity_id: binary_sensor.hm_sec_sco_meq1659102_state
     state: 'on'
   action:
   - service: notify.telegram_notify
@@ -656,7 +660,7 @@
       entity_id: timer.kg_timer_saunafenster
   condition:
   - condition: state
-    entity_id: binary_sensor.kgfssauna_state
+    entity_id: binary_sensor.kg_fs_sauna_state
     state: 'on'
   action:
   - service: notify.telegram_notify

@@ -1,4 +1,4 @@
-﻿sun.sun:
+sun.sun:
   friendly_name: Sonnenstand
 sensor.weather_symbol:
   friendly_name: Wetter
@@ -10,9 +10,9 @@ light.group_for_wakeup:
 light.esszimmer:
   hidden: true
 
-sensor.kgstromzaehler_gas_energy_counter:
+sensor.kg_stromzaehler_gas_energy_counter:
   hidden: true
-sensor.kgstromzaehler_gas_power:
+sensor.kg_stromzaehler_gas_power:
   hidden: true
 
 sensor.buderus_moduliert:
@@ -23,77 +23,82 @@ sensor.buderus_vollgas:
 
   #Homematic auflösen
   # Add an entry for each entity that you want to overwrite.
-switch.keq0942817:
+
+switch.og_swt_arbeitszimmer:
   #hidden: true
   friendly_name: OG.SWT.Arbeitszimmer
-switch.keq0944256:
+
+switch.og_swt_kinderzimmer:
   friendly_name: OG.SWT.Kinderzimmer
-switch.outdoorswaussenlicht2:
+
+switch.outdoor_sw_aussenlicht2:
 # KEQ1075606
   friendly_name: OUT.SWT.Aussenlicht2
-switch.outdoorswaussenlicht1:
+
+switch.outdoor_sw_aussenlicht1:
 # KEQ1076102
   friendly_name: OUT.SWT.Aussenlicht1
-switch.outdoorswaussenlicht3:
+
+switch.outdoor_sw_aussenlicht3:
 # MEQ0357447
   friendly_name: OUT.SWT.Aussenlicht3
 
 
 
 
-cover.keq0540906:  
+cover.eg_bl_wintergarten:  
 # KEQ0540906  
   friendly_name: EG.BL.Wintergarten
 
 
-climate.oghzbad:
+climate.og_hz_bad:
   friendly_name: OG.HZ.Badezimmer
 
-climate.kghzsauna:
+climate.kg_hz_sauna:
 # NEQ1410379
   friendly_name: KG.HZ.Sauna
 
-climate.oghzarbeitszimmer:
+climate.og_hz_arbeitszimmer:
 # MEQ1879097
   friendly_name: OG.HZ.Arbeitszimmer
 
-climate.oghzkinderzimmer:
+climate.og_hz_kinderzimmer:
 # MEQ0446066  
   friendly_name: OG.HZ.Kinderzimmer
   
-climate.kghzgaestezimmer:  
+climate.kg_hz_gaestezimmer:  
 # LEQ0849953
   friendly_name: KG.HZ.Gaestezimmer
   
-climate.oghzschlafzimmer1:
+climate.og_hz_schlafzimmer1:
 # MEQ1879093 
   friendly_name: OG.HZ.Schlafzimmer1
 
-climate.oghzschlafzimmer2:
+climate.og_hz_schlafzimmer2:
 # MEQ1880204 
   friendly_name: OG.HZ.Schlafzimmer2
 
-climate.eghzesszimmer:
+climate.eg_hz_esszimmer:
 # KEQ0722599
   friendly_name: EG.HZ.Esszimmer
 
-climate.eghzwohnzimmer1:
+climate.eg_hz_wohnzimmer1:
 # LEQ0257213
   friendly_name: EG.HZ.Wohnzimmer1
   
-climate.eghzwohnzimmer2:
+climate.eg_hz_wohnzimmer2:
 # LEQ1521231 
   friendly_name: EG.HZ.Wohnzimmer2
 
-climate.eghzwintergarten1:
+climate.eg_hz_wintergarten1:
 # LEQ0848792
   friendly_name: EG.HZ.Wintergarten1
 
-climate.eghzwintergarten2:
+climate.eg_hz_wintergarten2:
 # MEQ1879069
   friendly_name: EG.HZ.Wintergarten2
   
-switch.meq0327223:
+switch.kg_sw_bad:
   friendly_name: KG.SWT.Badezimmer
 
 
@@ -120,23 +125,23 @@ binary_sensor.keq0236832_motion:
 sensor.keq0236832_brightness:
   friendly_name: Outdoor.LUM.Mobil
 
-binary_sensor.outdoorbwmwest_motion:
+binary_sensor.outdoor_bwm_west_motion:
 # JEQ0701972
   friendly_name: Outdoor.BWM.West
 
-sensor.outdoorbwmwest_brightness:
+sensor.outdoor_bwm_west_brightness:
   friendly_name: Outdoor.LUM.West  
   
-binary_sensor.outdoorbwmnord_motion:
+binary_sensor.outdoor_bwm_nord_motion:
 # KEQ1070386  
   friendly_name: Outdoor.BWM.Nord
 
-sensor.outdoorbwmnord_brightness:
+sensor.outdoor_bwm_nord_brightness:
   friendly_name: Outdoor.LUM.Nord
   
-binary_sensor.leq0612014_motion:
-  friendly_name: Outdoor.BWM.Ost
+binary_sensor.outdoor_bmw_mobil_motion:
+  friendly_name: Outdoor.BWM.Mobil
   
-sensor.leq0612014_brightness:
-  friendly_name: Outdoor.LUM.Ost
+sensor.outdoor_bmw_mobil_brightness:
+  friendly_name: Outdoor.LUM.Mobil
   

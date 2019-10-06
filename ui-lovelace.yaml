@@ -9,30 +9,30 @@ views:
         entities:
           - light.sz_nachttisch_flo
           - light.sz_nachttisch_judith
-          - switch.neq0214472
+          -  switch.og_swt_schlafzimmer
           - sensor.og_schlafzimmer_feuchte
           - sensor.og_schlafzimmer_temperatur
-      - entity: climate.oghzschlafzimmer1
+      - entity: climate.og_hz_schlafzimmer1
         type: thermostat
-      - entity: climate.oghzschlafzimmer2
+      - entity: climate.og_hz_schlafzimmer2
         type: thermostat
       - title: Kinderzimmer
         show_header_toggle: true
         type: entities
         entities:
-          - switch.keq0944256
+          - switch.og_swt_kinderzimmer
           - sensor.og_kinderzimmer_feuchte
           - sensor.og_kinderzimmer_temperatur
-      - entity: climate.oghzkinderzimmer
+      - entity: climate.og_hz_kinderzimmer
         type: thermostat
       - title: Arbeitszimmer
         show_header_toggle: true
         type: entities
         entities:
-          - switch.keq0942817
+          - switch.og_swt_arbeitszimmer
           - sensor.og_arbeitszimmer_feuchte
           - sensor.og_arbeitszimmer_temperatur
-      - entity: climate.oghzarbeitszimmer
+      - entity: climate.og_hz_arbeitszimmer
         type: thermostat
       - title: Hue
         show_header_toggle: true
@@ -45,26 +45,26 @@ views:
         show_header_toggle: true
         type: entities
         entities:
-          - binary_sensor.kgfssauna_state
-      - entity: climate.kghzsauna
+          - binary_sensor.kg_fs_sauna_state
+      - entity: climate.kg_hz_sauna
         type: thermostat
       - title: Badezimmer unten
         show_header_toggle: true
         type: entities
         entities:
-          - switch.meq0327223
+          - switch.kg_sw_bad 
       - title: Badezimmer oben
         show_header_toggle: true
         type: entities
         entities:
-          - switch.keq0944721
+          - switch.og_swt_badezimmer
           - sensor.og_bad_feuchte
           - sensor.og_bad_temperatur
-      - entity: climate.oghzbad
+      - entity: climate.og_hz_bad
         type: thermostat
       - entity: media_player.badezimmer
         type: media-control
-      - entity: climate.kghzgaestezimmer
+      - entity: climate.kg_hz_gaestezimmer
         type: thermostat
       - title: Wohn-/Esszimmer
         show_header_toggle: true
@@ -81,11 +81,11 @@ views:
           - remote.apple_tv
           - sensor.eg_wohnzimmer_feuchte
           - sensor.eg_wohnzimmer_temperatur
-      - entity: climate.eghzesszimmer
+      - entity: climate.eg_hz_esszimmer
         type: thermostat
-      - entity: climate.eghzwohnzimmer1
+      - entity: climate.eg_hz_wohnzimmer1
         type: thermostat
-      - entity: climate.eghzwohnzimmer2
+      - entity: climate.eg_hz_wohnzimmer2
         type: thermostat
       - entity: media_player.samsung_q7f
         type: media-control
@@ -97,50 +97,50 @@ views:
         show_header_toggle: true
         type: entities
         entities:
-          - cover.keq0540906
+          - cover.eg_bl_wintergarten
           - light.wintergarten1
           - light.wintergarten2
           - light.wintergarten3
-      - entity: climate.eghzwintergarten1
+      - entity: climate.eg_hz_wintergarten1
         type: thermostat
-      - entity: climate.eghzwintergarten2
+      - entity: climate.eg_hz_wintergarten2
         type: thermostat
-      - entity: climate.eghzesszimmer
+      - entity: climate.eg_hz_esszimmer
         type: thermostat
-      - entity: climate.eghzwohnzimmer1
+      - entity: climate.eg_hz_wohnzimmer1
         type: thermostat
-      - entity: climate.eghzwohnzimmer2
+      - entity: climate.eg_hz_wohnzimmer2
         type: thermostat
-      - entity: climate.eghzgarderobe
+      - entity: climate.eg_hz_garderobe
         type: thermostat
-      - entity: climate.kghzdurchgang
+      - entity: climate.kg_hz_durchgang
         type: thermostat
-      - entity: climate.kghzgaestezimmer
+      - entity: climate.kg_hz_gaestezimmer
         type: thermostat
-      - entity: climate.kghzsauna
+      - entity: climate.kg_hz_sauna
         type: thermostat
-      - entity: climate.oghzarbeitszimmer
+      - entity: climate.og_hz_arbeitszimmer
         type: thermostat
-      - entity: climate.oghzbad
+      - entity: climate.og_hz_bad
         type: thermostat
-      - entity: climate.oghzkinderzimmer
+      - entity: climate.og_hz_kinderzimmer
         type: thermostat
-      - entity: climate.oghzschlafzimmer1
+      - entity: climate.og_hz_schlafzimmer1
         type: thermostat
-      - entity: climate.oghzschlafzimmer2
+      - entity: climate.og_hz_schlafzimmer2
         type: thermostat
-      - entity: climate.eghzwintergarten1
+      - entity: climate.eg_hz_wintergarten1
         type: thermostat
-      - entity: climate.eghzwintergarten2
+      - entity: climate.eg_hz_wintergarten2
         type: thermostat
       - title: Automatiserungen
         show_header_toggle: true
         type: entities
         entities:
-          - automation.egeventmotionflur1_off
-          - automation.egeventmotionflur1_on
-          - automation.ogeventmotiontreppe_off
-          - automation.ogeventmotiontreppenhaus_on
+          - automation.eg_event_motion_flur1_off
+          - automation.eg_event_motion_flur1_on
+          - automation.og_event_motion_treppe_off
+          - automation.og_event_motion_treppenhaus_on
           - automation.markise_down
           - automation.markise_up
           - automation.ssl_expiry_notification
@@ -156,8 +156,8 @@ views:
           - sensor.current_weather_rain
           - sensor.current_weather_temperature
           - sensor.current_weather_wind_speed
-          - sensor.dwdweatherwarnings_advance_warning_level
-          - sensor.dwdweatherwarnings_current_warning_level
+          - sensor.dwd_weather_warnings_advance_warning_level
+          - sensor.dwd_weather_warnings_current_warning_level
           - sensor.weather_cloudiness
           - sensor.weather_dewpoint_temperature
           - sensor.weather_fog
@@ -278,9 +278,9 @@ views:
       - title: Schalter
         type: entities
         entities:
-          - switch.outdoorswaussenlicht2
-          - switch.outdoorswaussenlicht3
-          - switch.outdoorswaussenlicht1
+          - switch.outdoor_sw_aussenlicht2
+          - switch.outdoor_sw_aussenlicht3
+          - switch.outdoor_sw_aussenlicht1
           - switch.standheizung
       - title: Z-Wave
         type: entities
@@ -291,11 +291,11 @@ views:
           - zwave.fibaro_system_fgd212_dimmer_2
     badges:
       - binary_sensor.meq1659102_state
-      - binary_sensor.outdoorbwmwest_motion
-      - binary_sensor.outdoorbwmnord_motion
+      - binary_sensor.outdoor_bwm_west_motion
+      - binary_sensor.outdoor_bwm_nord_motion
       - binary_sensor.fibaro_system_fgms001zw5_motion_sensor_sensor
-      - binary_sensor.keq0236832_motion
-      - binary_sensor.leq0612014_motion
+      - binary_sensor.outdoor_bmw_sued_motion
+      - binary_sensor.outdoor_bmw_mobil_motion
       - sensor.buderus_verbrauch_d
       - sensor.kgstromzaehler_energy_counter
       - sensor.fibaro_system_fgd212_dimmer_2_power_4
@@ -312,10 +312,10 @@ views:
       - sensor.eg_waschkueche_feuchte
       - sensor.fibaro_system_fgd212_dimmer_2_power_management_2
       - sensor.dwd_weather_warnings_current_warning_level
-      - sensor.kgstromzaehler_power
+      - sensor.k_gstromzaehler_power
       - sensor.standheizung_current
       - sensor.kg_keller_temperatur
-      - sensor.leq0612014_brightness
+      - sensor.outdoor_bwm_sued_brightness
       - sensor.fibaro_system_fgd212_dimmer_2_alarm_type_2
       - sensor.fibaro_system_fgms001zw5_motion_sensor_temperature
       - sensor.fibaro_system_fgd212_dimmer_2_system
@@ -337,11 +337,11 @@ views:
       - sensor.fibaro_system_fgd212_dimmer_2_sourcenodeid_2
       - sensor.fibaro_system_fgms001zw5_motion_sensor_alarm_level
       - sensor.kg_gaestezimmer_feuchte
-      - sensor.keq0236832_brightness
+      - sensor.outdoor_bwm_mobil_brightness
       - sensor.fibaro_system_fgms001zw5_motion_sensor_general
-      - sensor.outdoorbwmwest_brightness
+      - sensor.outdoor_bwm_west_brightness
       - sensor.ssl_cert_expiry
-      - sensor.outdoorbwmnord_brightness
+      - sensor.outdoor_bwm_nord_brightness
       - sensor.standheizung_power
       - sensor.fibaro_system_fgd212_dimmer_2_power_2
       - sensor.fibaro_system_fgd212_dimmer_2_power_management
@@ -351,7 +351,7 @@ views:
       - sensor.iphone_von_judith_daur_battery_level
       - sensor.judith_battery_level
       - sensor.kg_gaestezimmer_temperatur
-      - sensor.hmsecwds2_meq0585132_state
+      - sensor.hm_sec_wds2_meq0585132_state
       - sensor.fibaro_system_fgd212_dimmer_2_energy
       - sensor.fibaro_system_fgd212_dimmer_2_exporting_2
       - sensor.fibaro_system_fgd212_dimmer_2_alarm_level_2
@@ -380,11 +380,11 @@ views:
           - remote.apple_tv
           - sensor.eg_wohnzimmer_feuchte
           - sensor.eg_wohnzimmer_temperatur
-      - entity: climate.eghzesszimmer
+      - entity: climate.eg_hz_esszimmer
         type: thermostat
-      - entity: climate.eghzwohnzimmer1
+      - entity: climate.eg_hz_wohnzimmer1
         type: thermostat
-      - entity: climate.eghzwohnzimmer2
+      - entity: climate.eg_hz_wohnzimmer2
         type: thermostat
       - entity: media_player.samsung_q7f
         type: media-control
@@ -396,13 +396,13 @@ views:
         show_header_toggle: true
         type: entities
         entities:
-          - cover.keq0540906
+          - cover.eg_bl_wintergarten
           - light.wintergarten1
           - light.wintergarten2
           - light.wintergarten3
-      - entity: climate.eghzwintergarten1
+      - entity: climate.eg_hz_wintergarten1
         type: thermostat
-      - entity: climate.eghzwintergarten2
+      - entity: climate.eg_hz_wintergarten2
         type: thermostat
     badges:
       - sensor.eg_waschkueche_feuchte
@@ -412,41 +412,42 @@ views:
   - title: Untergeschoss
     path: keller
     cards:
-      - entity: climate.eghzesszimmer
+      - entity: climate.eg_hz_esszimmer
         type: thermostat
-      - entity: climate.eghzwohnzimmer1
+      - entity: climate.eg_hz_wohnzimmer1
         type: thermostat
-      - entity: climate.eghzwohnzimmer2
+      - entity: climate.eg_hz_wohnzimmer2
         type: thermostat
-      - entity: climate.eghzgarderobe
+      - entity: climate.eg_h_zgarderobe
         type: thermostat
-      - entity: climate.kghzdurchgang
+      - entity: climate.kg_hz_durchgang
         type: thermostat
-      - entity: climate.kghzgaestezimmer
+      - entity: climate.kg_hz_gaestezimmer
         type: thermostat
-      - entity: climate.kghzsauna
+      - entity: climate.kg_hz_sauna
         type: thermostat
-      - entity: climate.oghzarbeitszimmer
+      - entity: climate.og_hz_arbeitszimmer
         type: thermostat
-      - entity: climate.oghzbad
+      - entity: climate.og_hz_bad
         type: thermostat
-      - entity: climate.oghzkinderzimmer
+      - entity: climate.og_hz_kinderzimmer
         type: thermostat
-      - entity: climate.oghzschlafzimmer1
+      - entity: climate.og_hz_schlafzimmer1
         type: thermostat
-      - entity: climate.oghzschlafzimmer2
+      - entity: climate.og_hz_schlafzimmer2
         type: thermostat
-      - entity: climate.kghzgaestezimmer
+      - entity: climate.kg_hz_gaestezimmer
         type: thermostat
       - title: Sauna
         show_header_toggle: true
         type: entities
         entities:
-          - binary_sensor.kgfssauna_state
-      - entity: climate.kghzsauna
+          - binary_sensor.kg_fs_sauna_state
+      - entity: climate.kg_hz_sauna
         type: thermostat
       - title: Badezimmer unten
         show_header_toggle: true
+# bis hierhin geaendert
         type: entities
         entities:
           - switch.meq0327223
@@ -455,8 +456,8 @@ views:
       - sensor.kg_gaestezimmer_temperatur
       - sensor.kg_keller_feuchte
       - sensor.kg_keller_temperatur
-      - sensor.kgstromzaehler_energy_counter
-      - sensor.kgstromzaehler_power
+      - sensor.kg_stromzaehler_energy_counter
+      - sensor.kg_stromzaehler_power
   - title: Obergeschoss
     path: oben
     cards:
